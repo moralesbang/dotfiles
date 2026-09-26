@@ -4,6 +4,8 @@ theme = "Catppuccin Mocha"
 
 background = #0f0e16
 foreground = #f7f8fd
+cursor-color = #f5c2e7
+palette = 2=#a1e99b
 background-opacity = 0.9
 background-opacity-cells = true
 background-blur-radius = 20
