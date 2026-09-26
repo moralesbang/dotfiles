@@ -24,3 +24,17 @@ if [[ -o interactive ]]; then
   autoload -U add-zsh-hook
   add-zsh-hook chpwd _gh_auto_account
 fi
+
+# --- nvim: default file-picker scope inside ~/Projects/Humand ---
+# Relative to the repo root; nvim falls back to the whole repo if it doesn't exist there.
+_nvim_pick_scope() {
+  if [[ "$PWD" == "$HOME/Projects/Humand"* ]]; then
+    export NVIM_PICK_SCOPE="src/pages/dashboard/PeopleExperience"
+  else
+    unset NVIM_PICK_SCOPE
+  fi
+}
+_nvim_pick_scope
+if [[ -o interactive ]]; then
+  add-zsh-hook chpwd _nvim_pick_scope
+fi
