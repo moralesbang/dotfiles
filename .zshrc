@@ -10,7 +10,7 @@
 #   a known-good PATH. If you swap the order, `$PATH` may be empty when brew
 #   expands it, leaving the shell without /bin or /usr/bin and breaking
 #   everything downstream (oh-my-zsh, nvm, atuin, zoxide, aliases, etc.).
-# - This must live in .zshrc (not only .zprofile) because tmux and other tools
+# - This must live in .zshrc (not only .zprofile) because other tools can
 #   spawn non-login shells that never source .zprofile.
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -72,40 +72,6 @@ alias v='nvim'
 alias cc='claude'
 alias oc='opencode'
 alias lg='lazygit'
-
-# ====================
-# hu - Humand dev environment
-# ====================
-hu() {
-  local base="$HOME/Projects/Humand"
-  local -A repos=(
-    [web]="$base/hu-web"
-    [backoffice]="$base/hu-backoffice"
-    [translations]="$base/hu-translations"
-    [material]="$base/hu-material-ds"
-  )
-
-  # Create sessions
-  # NOTE: Do NOT name the loop variable `path` — in zsh, $path is a tied array
-  # that mirrors $PATH. Assigning to it overwrites PATH and breaks every
-  # command in the shell.
-  for name repo_path in "${(@kv)repos}"; do
-    if ! tmux has-session -t "$name" 2>/dev/null; then
-      tmux new-session -d -s "$name" -c "$repo_path"
-      tmux split-window -h -t "$name" -c "$repo_path" -l 30%
-      tmux send-keys -t "$name":1.1 'nvim' C-m
-      tmux send-keys -t "$name":1.2 'claude' C-m
-      tmux select-pane -t "$name":1.1
-    fi
-  done
-
-  # Attach to web (or switch if already inside tmux)
-  if [[ -n "$TMUX" ]]; then
-    tmux switch-client -t web
-  else
-    tmux attach-session -t web
-  fi
-}
 
 alias clauded='claude --dangerously-skip-permissions'
 
