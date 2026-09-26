@@ -21,3 +21,5 @@ vim.o.undofile = true -- persistant undo history
 vim.o.number = true -- enable line numbers
 vim.o.relativenumber = true -- enable relative line numbers
 
+vim.o.splitbelow = true -- better splitting
+vim.o.splitright = true -- better splitting
