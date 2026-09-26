@@ -1,6 +1,5 @@
 font-family = MonaspiceAr Nerd Font Mono
 font-size = 14
-# theme = light:Gruvbox Light,dark:Night Owl
 theme = "Night Owl"
 
 background = #031219
@@ -19,10 +18,6 @@ window-decoration = auto
 window-padding-x = 10
 window-padding-y = 10
 window-padding-balance = true
-
-# background-opacity = 0.9
-# background-blur-radius = 20
-
 auto-update = check
 auto-update-channel = stable
 
