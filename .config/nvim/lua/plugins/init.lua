@@ -1,23 +1,16 @@
 vim.pack.add {
-  "https://github.com/nvim-mini/mini.nvim",
-
-  -- Appearance
-  "https://github.com/catppuccin/nvim",
-
-  -- LSP, completion and formatting
-  "https://github.com/mason-org/mason.nvim",
-  "https://github.com/mason-org/mason-lspconfig.nvim",
-  "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim",
-  "https://github.com/neovim/nvim-lspconfig",
-  "https://github.com/stevearc/conform.nvim",
+  -- colorscheme
+  { src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
+  -- the goat file manager
+  { src = "https://github.com/stevearc/oil.nvim", name = "oil" },
+  -- add gitstatus to the goat file manager
+  "https://github.com/refractalize/oil-git-status.nvim",
+  -- auto load into jsonls and yamlls completions from SchemaStore
   "https://github.com/b0o/SchemaStore.nvim",
-
-  -- Git
+  -- diff viewer inspired by zed diff (multibuffer)
   "https://github.com/martindur/zdiff.nvim",
 }
 
 require("plugins.colorscheme")
-require("plugins.mini")
-require("plugins.lsp")
-require("plugins.formatting")
+require("plugins.oil")
 require("plugins.git")
