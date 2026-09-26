@@ -2,7 +2,7 @@ font-family = MonaspiceAr Nerd Font Mono
 font-size = 14
 theme = "Rose Pine"
 
-background = #191724
+background = #0f0e16
 background-opacity = 0.9
 background-opacity-cells = true
 background-blur-radius = 20

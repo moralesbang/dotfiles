@@ -6,3 +6,8 @@ alias tree='eza --tree --icons'
 
 alias cc=claude
 alias lg=lazygit
+alias v=nvim
+
+# bat: cat with syntax highlighting
+alias cat='bat --paging=never'
+
