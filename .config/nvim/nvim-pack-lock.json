@@ -8,6 +8,10 @@
       "rev": "edefef779ab08ce1a4a404713e3012b0d202bd35",
       "src": "https://github.com/catppuccin/nvim"
     },
+    "mini.icons": {
+      "rev": "f642e3ba8c12afbc8f32f6d77ef6597eac56786f",
+      "src": "https://github.com/nvim-mini/mini.icons"
+    },
     "oil": {
       "rev": "b73018b75affd13fa38e2fc94ef753b465f770d7",
       "src": "https://github.com/stevearc/oil.nvim"
