@@ -70,7 +70,19 @@ map_multistep("i", "<CR>", { "pmenu_accept", "minipairs_cr" })
 map_multistep("i", "<BS>", { "minipairs_bs" })
 
 -- Navigation
-require("mini.files").setup()
+-- `nvim <dir>` shows the starter (cwd = <dir>) instead of an explorer; `-` still opens mini.files
+vim.g.loaded_netrwPlugin = 1
+require("mini.files").setup { options = { use_as_default_explorer = false } }
+vim.api.nvim_create_autocmd("VimEnter", {
+  once = true,
+  callback = function()
+    if vim.fn.argc() ~= 1 or vim.fn.isdirectory(vim.fn.argv(0)) == 0 then return end
+    local dir_buf = vim.api.nvim_get_current_buf()
+    vim.fn.chdir(vim.fn.argv(0))
+    MiniStarter.open()
+    vim.api.nvim_buf_delete(dir_buf, { force = true })
+  end,
+})
 require("mini.pick").setup()
 require("mini.extra").setup()
 require("mini.visits").setup()
