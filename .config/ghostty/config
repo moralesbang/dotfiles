@@ -1,8 +1,9 @@
 font-family = MonaspiceAr Nerd Font Mono
 font-size = 14
-theme = "Rose Pine"
+theme = "Catppuccin Mocha"
 
 background = #0f0e16
+foreground = #f7f8fd
 background-opacity = 0.9
 background-opacity-cells = true
 background-blur-radius = 20
