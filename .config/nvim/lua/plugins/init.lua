@@ -23,6 +23,11 @@ vim.pack.add {
   "https://github.com/nvim-telescope/telescope-fzf-native.nvim",
 
   -- LSP, completion and formatting
+  "https://github.com/mason-org/mason.nvim",
+  "https://github.com/mason-org/mason-lspconfig.nvim",
+  "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim",
+  "https://github.com/neovim/nvim-lspconfig",
+  "https://github.com/stevearc/conform.nvim",
   "https://github.com/b0o/SchemaStore.nvim",
 
   -- Git
@@ -34,4 +39,6 @@ require("plugins.colorscheme")
 require("plugins.lualine")
 require("plugins.oil")
 require("plugins.telescope")
+require("plugins.lsp")
+require("plugins.formatting")
 require("plugins.git")
