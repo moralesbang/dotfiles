@@ -1,8 +1,8 @@
 font-family = MonaspiceAr Nerd Font Mono
 font-size = 14
-theme = "Night Owl"
+theme = "Rose Pine"
 
-background = #031219
+background = #191724
 background-opacity = 0.9
 background-opacity-cells = true
 background-blur-radius = 20
