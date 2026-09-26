@@ -1,0 +1,32 @@
+font-family = MonaspiceAr Nerd Font Mono
+font-size = 14
+# theme = light:Gruvbox Light,dark:Night Owl
+theme = "Night Owl"
+
+background = #031219
+background-opacity = 0.9
+background-opacity-cells = true
+background-blur-radius = 20
+
+cursor-style = block
+cursor-style-blink = false
+
+mouse-hide-while-typing = true
+macos-option-as-alt = left
+macos-titlebar-style = hidden
+
+window-decoration = auto
+window-padding-x = 10
+window-padding-y = 10
+window-padding-balance = true
+
+# background-opacity = 0.9
+# background-blur-radius = 20
+
+auto-update = check
+auto-update-channel = stable
+
+shell-integration-features = no-cursor
+copy-on-select = clipboard
+
+custom-shader = ~/.config/ghostty/shaders/cursor_warp.glsl
