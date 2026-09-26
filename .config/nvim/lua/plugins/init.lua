@@ -7,10 +7,7 @@ vim.pack.add {
   "https://github.com/refractalize/oil-git-status.nvim",
   -- auto load into jsonls and yamlls completions from SchemaStore
   "https://github.com/b0o/SchemaStore.nvim",
-  -- diff viewer inspired by zed diff (multibuffer)
-  "https://github.com/martindur/zdiff.nvim",
 }
 
 require("plugins.colorscheme")
 require("plugins.oil")
-require("plugins.git")
