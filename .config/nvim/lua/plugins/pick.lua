@@ -92,7 +92,7 @@ local function default_scope()
 
   return {
     cwd = vim.fs.joinpath(context.root, people_experience_path),
-    name = "People Experience",
+    name = "PeopleExperience",
     search_args = default_search_args,
   }
 end
