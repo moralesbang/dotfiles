@@ -1,6 +1,8 @@
 vim.pack.add {
   -- colorscheme
   { src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
+  -- color the current line number by mode
+  "https://github.com/mawkler/modicator.nvim",
   -- file and folder icons for plugins
   "https://github.com/nvim-mini/mini.icons",
   -- fuzzy file, text, and selection picker
@@ -24,6 +26,7 @@ vim.pack.add {
 }
 
 require("plugins.colorscheme")
+require("plugins.modicator")
 require("plugins.icons")
 require("plugins.pick")
 require("plugins.statusline")
