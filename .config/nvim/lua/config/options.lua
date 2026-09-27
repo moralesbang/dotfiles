@@ -10,3 +10,5 @@ vim.o.expandtab = true -- use appropriate number of spaces with tab
 vim.o.smartindent = true -- indenting correctly after {
 vim.o.autoindent = true -- copy indent from current line when starting new line
 vim.o.scrolloff = 8 -- always keep 8 lines above/below cursor unless at start/end of file
+vim.o.laststatus = 3 -- single global statusline instead of one per window
+vim.o.showmode = false -- mode is already shown in the statusline

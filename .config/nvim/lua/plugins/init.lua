@@ -5,6 +5,8 @@ vim.pack.add {
   "https://github.com/nvim-mini/mini.icons",
   -- fuzzy file, text, and selection picker
   "https://github.com/nvim-mini/mini.pick",
+  -- minimal statusline
+  "https://github.com/nvim-mini/mini.statusline",
   -- the goat file manager
   { src = "https://github.com/stevearc/oil.nvim", name = "oil" },
   -- add gitstatus to the goat file manager
@@ -24,6 +26,7 @@ vim.pack.add {
 require("plugins.colorscheme")
 require("plugins.icons")
 require("plugins.pick")
+require("plugins.statusline")
 require("plugins.oil")
 require("plugins.lsp")
 require("plugins.formatting")
