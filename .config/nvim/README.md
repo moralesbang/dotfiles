@@ -68,4 +68,6 @@ MiniPick also provides the interface for `vim.ui.select`, Neovim's shared API fo
 ## Oil and MiniPick
 
 - Press `-` to open Oil when navigating or modifying files and directories.
+- Press `gyr` to copy the cursor entry's path relative to Neovim's working directory to the system clipboard.
+- Press `gya` to copy the cursor entry's absolute path to the system clipboard, abbreviating your home directory as `~`.
 - Use MiniPick when searching by file name, searching file contents, switching buffers, or choosing from a plugin-provided menu.
