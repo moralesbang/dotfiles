@@ -9,6 +9,10 @@ vim.pack.add {
   "https://github.com/nvim-mini/mini.pick",
   -- minimal statusline
   "https://github.com/nvim-mini/mini.statusline",
+  -- popup hints for pending keymaps
+  "https://github.com/nvim-mini/mini.clue",
+  -- extra pickers for mini.pick
+  "https://github.com/nvim-mini/mini.extra",
   -- the goat file manager
   { src = "https://github.com/stevearc/oil.nvim", name = "oil" },
   -- add gitstatus to the goat file manager
@@ -30,6 +34,8 @@ require("plugins.modicator")
 require("plugins.icons")
 require("plugins.pick")
 require("plugins.statusline")
+require("plugins.clue")
+require("plugins.mini_extra")
 require("plugins.oil")
 require("plugins.lsp")
 require("plugins.formatting")
