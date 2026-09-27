@@ -9,7 +9,15 @@ vim.pack.add {
   { src = "https://github.com/stevearc/oil.nvim", name = "oil" },
   -- add gitstatus to the goat file manager
   "https://github.com/refractalize/oil-git-status.nvim",
-  -- auto load into jsonls and yamlls completions from SchemaStore
+  -- install and manage external developer tools
+  "https://github.com/mason-org/mason.nvim",
+  -- connect Mason packages to Neovim's LSP client
+  "https://github.com/mason-org/mason-lspconfig.nvim",
+  -- provide default configurations for language servers
+  "https://github.com/neovim/nvim-lspconfig",
+  -- format buffers with project-aware formatters
+  "https://github.com/stevearc/conform.nvim",
+  -- add JSON schemas to jsonls completions and validation
   "https://github.com/b0o/SchemaStore.nvim",
 }
 
@@ -17,3 +25,5 @@ require("plugins.colorscheme")
 require("plugins.icons")
 require("plugins.pick")
 require("plugins.oil")
+require("plugins.lsp")
+require("plugins.formatting")
