@@ -11,7 +11,12 @@ alias ggl='git pull origin $(current_branch)'
 alias ggp='git push origin $(current_branch)'
 alias ggfl='git push --force-with-lease origin $(current_branch)'
 alias gsw='git switch'
-alias gswd='git switch $(git_develop_branch)'
+alias gswd='git switch develop'
+alias grbod='git rebase origin/develop'
+alias grb='git rebase'
+alias grbo='git rebase --onto'
+alias grba='git rebase --abort'
+alias grbc='git rebase --continue'
 alias lg=lazygit
 alias v=nvim
 
