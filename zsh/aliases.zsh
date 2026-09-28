@@ -5,6 +5,7 @@ alias l='eza --long --all --git --icons=always --group-directories-first'
 alias tree='eza --tree --icons'
 
 alias cc=claude
+alias reload='source ~/.zshrc'
 alias gco='git checkout'
 alias gfo='git fetch origin'
 alias ggl='git pull origin $(git branch --show-current)'
