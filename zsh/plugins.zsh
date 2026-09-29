@@ -6,5 +6,5 @@ zinit light Giammarco-Ferranti/deja
 # Prompt
 eval "$(starship init zsh)"
 
- # Syntax highlighting
+# Syntax highlighting
 zinit light zsh-users/zsh-syntax-highlighting
