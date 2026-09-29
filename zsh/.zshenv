@@ -1,4 +1,6 @@
 export ZDOTDIR="$HOME/Projects/dotfiles/zsh"
+path=("$HOME/.local/bin" ${path:#$HOME/.local/bin})
+path=("$HOME/.bun/bin" ${path:#$HOME/.bun/bin})
 
 
 # deja overrides
