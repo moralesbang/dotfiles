@@ -1,17 +1,41 @@
-local function copy_entry_path(format)
+local function relative_to_cwd(path)
+  local cwd = vim.fn.getcwd()
+  local relative = vim.fs.relpath(cwd, path)
+  if relative then
+    return relative
+  end
+
+  local depth = 0
+  for parent in vim.fs.parents(cwd) do
+    depth = depth + 1
+    relative = vim.fs.relpath(parent, path)
+    if relative then
+      return ("../"):rep(depth) .. (relative == "." and "" or relative)
+    end
+  end
+end
+
+local function copy_path(format)
   local oil = require("oil")
   local entry = oil.get_cursor_entry()
   local directory = oil.get_current_dir()
-  if not entry or not directory then
-    vim.notify("Path copying is only available for local files", vim.log.levels.ERROR)
+  if not directory then
+    vim.notify("Path copying is only available for local directories", vim.log.levels.ERROR)
     return
   end
 
-  local path = vim.fs.normalize(directory .. entry.name)
+  local path = vim.fs.normalize(entry and vim.fs.joinpath(directory, entry.name) or directory)
   if format == "relative" then
-    path = vim.fn.fnamemodify(path, ":.")
+    path = relative_to_cwd(path)
   else
     path = vim.fn.fnamemodify(path, ":~")
+  end
+  if not path then
+    vim.notify("Could not make path relative to the working directory", vim.log.levels.ERROR)
+    return
+  end
+  if (not entry or entry.type == "directory") and path:sub(-1) ~= "/" then
+    path = path .. "/"
   end
 
   local copied, error_message = pcall(vim.fn.setreg, "+", path)
@@ -26,17 +50,19 @@ end
 require("oil").setup {
   default_file_explorer = true,
   keymaps = {
-    ["gyr"] = {
+    ["<leader>yp"] = {
       callback = function()
-        copy_entry_path("relative")
+        copy_path("relative")
       end,
-      desc = "Copy relative path to system clipboard",
+      mode = "n",
+      desc = "Copy cwd-relative path to system clipboard",
     },
-    ["gya"] = {
+    ["<leader>yh"] = {
       callback = function()
-        copy_entry_path("absolute")
+        copy_path("absolute")
       end,
-      desc = "Copy absolute path to system clipboard",
+      mode = "n",
+      desc = "Copy path with ~ for home to system clipboard",
     },
   },
   view_options = {

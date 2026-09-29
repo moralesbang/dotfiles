@@ -20,6 +20,10 @@
       "rev": "2a6940af80375532e5e9e7c1f2fc6319a1b7a69d",
       "src": "https://github.com/mason-org/mason.nvim"
     },
+    "mini.basics": {
+      "rev": "63e3ea1a296c09a033176e6aee7202ed37e17495",
+      "src": "https://github.com/nvim-mini/mini.basics"
+    },
     "mini.clue": {
       "rev": "1c136d62729c8c3b0c2d91379bc37efac15d916e",
       "src": "https://github.com/nvim-mini/mini.clue"

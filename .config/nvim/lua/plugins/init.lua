@@ -1,4 +1,6 @@
 vim.pack.add {
+  -- sensible options, mappings, and autocommands
+  "https://github.com/nvim-mini/mini.basics",
   -- colorscheme
   { src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
   -- color the current line number by mode
@@ -29,6 +31,7 @@ vim.pack.add {
   "https://github.com/b0o/SchemaStore.nvim",
 }
 
+require("plugins.basics")
 require("plugins.colorscheme")
 require("plugins.modicator")
 require("plugins.icons")

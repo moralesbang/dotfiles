@@ -34,3 +34,16 @@ clue.setup {
     config = { width = "auto" },
   },
 }
+
+-- Oil's nested buffers are unlisted, so mini.clue does not add triggers automatically.
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "oil",
+  callback = function(ev)
+    vim.schedule(function()
+      if vim.api.nvim_buf_is_valid(ev.buf) then
+        clue.ensure_buf_triggers(ev.buf)
+      end
+    end)
+  end,
+  desc = "Enable key clues in Oil buffers",
+})

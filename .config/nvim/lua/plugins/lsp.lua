@@ -64,9 +64,6 @@ vim.diagnostic.config {
   float = { border = "rounded" },
 }
 
-vim.o.completeopt = "menuone,noselect,popup,fuzzy"
-vim.o.signcolumn = "yes"
-
 -- Neovim supplies most LSP mappings by default. Add definition/declaration
 -- jumps and opt in to its built-in completion UI for every attached server.
 vim.api.nvim_create_autocmd("LspAttach", {
