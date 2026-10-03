@@ -1,4 +1,5 @@
 local pick = require("mini.pick")
+local M = {}
 
 pick.setup()
 
@@ -193,13 +194,17 @@ local function live_grep(scope)
   })
 end
 
-vim.keymap.set("n", "<leader>ff", function()
+function M.find_files()
   find_files(default_scope())
-end, { desc = "Find files in default scope" })
+end
 
-vim.keymap.set("n", "<leader>fg", function()
+function M.live_grep()
   live_grep(default_scope())
-end, { desc = "Live grep in default scope" })
+end
+
+vim.keymap.set("n", "<leader>ff", M.find_files, { desc = "Find files in default scope" })
+
+vim.keymap.set("n", "<leader>fg", M.live_grep, { desc = "Live grep in default scope" })
 
 vim.keymap.set("n", "<leader>fF", function()
   find_files(project_scope())
@@ -211,3 +216,5 @@ end, { desc = "Live grep across project, including ignored" })
 
 vim.keymap.set("n", "<leader>fb", pick.builtin.buffers, { desc = "Find open buffers" })
 vim.keymap.set("n", "<leader>fr", pick.builtin.resume, { desc = "Resume previous picker" })
+
+return M

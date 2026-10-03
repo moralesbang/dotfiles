@@ -15,6 +15,22 @@ This configuration uses [Oil](https://github.com/stevearc/oil.nvim) for filesyst
 
 `<leader>` is Space.
 
+## Buffer mappings
+
+These mappings follow LazyVim, using `mini.bufremove` instead of Snacks for buffer deletion.
+
+| Mapping | Action |
+| --- | --- |
+| `H` / `[b` | Previous buffer |
+| `L` / `]b` | Next buffer |
+| `<leader>bb` / ``<leader>` `` | Switch to the alternate buffer |
+| `<leader>bd` | Delete the current buffer, preserving splits |
+| `<leader>bo` | Delete other listed buffers, preserving splits |
+| `<leader>bi` | Delete listed buffers not visible in any tab |
+| `<leader>bD` | Delete the current buffer and close its windows |
+
+Deletion with `mini.bufremove` asks for confirmation before discarding unsaved changes. `<leader>bD` uses Neovim's `:bdelete`, which refuses to discard unsaved changes.
+
 ## Search scopes
 
 | Context | Default scope (`ff`/`fg`) | Across-project scope (`fF`/`fG`) |
@@ -71,3 +87,11 @@ MiniPick also provides the interface for `vim.ui.select`, Neovim's shared API fo
 - Press `gyr` to copy the cursor entry's path relative to Neovim's working directory to the system clipboard.
 - Press `gya` to copy the cursor entry's absolute path to the system clipboard, abbreviating your home directory as `~`.
 - Use MiniPick when searching by file name, searching file contents, switching buffers, or choosing from a plugin-provided menu.
+
+## Markdown rendering
+
+[render-markdown.nvim](https://github.com/MeanderingProgrammer/render-markdown.nvim) is disabled by default. In Markdown buffers, press `<leader>mr` (Space, m, r) or run `:RenderMarkdown buf_toggle` to toggle rendering for the current buffer only. Other buffers remain unchanged.
+
+Rendering keeps the plugin's default backgrounds and tables but removes decorative icons from headings, code blocks, links, callouts, and the sign column. Lists and checkboxes keep their original Markdown markers. Raw Markdown is shown in Insert mode and on the cursor line. Tree-sitter highlighting is enabled for Markdown using Neovim's bundled `markdown` and `markdown_inline` parsers. This configuration requires a Neovim installation that includes both parsers (as Neovim 0.12 does).
+
+Run `:checkhealth render-markdown` to check the setup. HTML comment concealment, LaTeX rendering, and YAML frontmatter rendering need optional parsers/tools that are not installed by this configuration.

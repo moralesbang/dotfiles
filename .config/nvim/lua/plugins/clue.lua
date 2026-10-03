@@ -19,10 +19,12 @@ clue.setup {
 
   clues = {
     -- leader groups
+    { mode = "n", keys = "<Leader>b", desc = "+buffer" },
     { mode = "n", keys = "<Leader>f", desc = "+find" },
     { mode = "x", keys = "<Leader>f", desc = "+find" },
     { mode = "n", keys = "<Leader>c", desc = "+code" },
     { mode = "x", keys = "<Leader>c", desc = "+code" },
+    { mode = "n", keys = "<Leader>m", desc = "+markdown" },
     -- built-in descriptions
     clue.gen_clues.g(),
     clue.gen_clues.z(),

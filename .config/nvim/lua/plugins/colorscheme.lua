@@ -1,4 +1,4 @@
-require("catppuccin").setup {
+require("catppuccin").setup({
   flavour = "mocha",
   transparent_background = true,
   custom_highlights = function(colors)
@@ -14,8 +14,9 @@ require("catppuccin").setup {
       CommandMode = { fg = colors.peach },
       TerminalMode = { fg = colors.teal },
       TerminalNormalMode = { fg = colors.blue },
+      MiniStarterHeader = { fg = colors.teal },
     }
   end,
-}
+})
 
-vim.cmd.colorscheme "catppuccin"
+vim.cmd.colorscheme("catppuccin")
