@@ -40,3 +40,22 @@ _nvim_pick_scope
 if [[ -o interactive ]]; then
   add-zsh-hook chpwd _nvim_pick_scope
 fi
+
+# --- node: use the version pinned by the nearest .nvmrc ---
+# Prepends that nvm-installed version's bin to PATH, without sourcing nvm.sh (~0.5s).
+# Outside a pinned project, or if the version isn't installed, Homebrew's node stays.
+# Registered for every shell, not just interactive ones, so Claude Code's Bash tool
+# runs the project's node too. .zprofile calls it again after `brew shellenv`.
+_node_auto_version() {
+  path=(${path:#$HOME/.nvm/versions/node/*})
+  local dir="$PWD"
+  while [[ -n "$dir" && ! -f "$dir/.nvmrc" ]]; do dir="${dir%/*}"; done
+  [[ -f "$dir/.nvmrc" ]] || return
+  local version="$(<"$dir/.nvmrc")"
+  version="v${${version//[[:space:]]/}#v}"
+  local bin="$HOME/.nvm/versions/node/$version/bin"
+  [[ -d "$bin" ]] && path=("$bin" $path)
+}
+_node_auto_version
+autoload -U add-zsh-hook
+add-zsh-hook chpwd _node_auto_version
