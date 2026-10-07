@@ -1,0 +1,86 @@
+/* Catppuccin Macchiato overrides, appended to the plugin's original Markdown CSS. */
+:root,
+[data-theme="dark"],
+[data-theme="light"] {
+  color-scheme: dark;
+  --foreground-color: #f7f8fd;
+  --background-color: #24273a;
+  --secondary-background-color: #0f0e16;
+  --border-color: #494d64;
+  --color-text-primary: #f7f8fd;
+  --color-text-tertiary: #a5adcb;
+  --color-text-link: #8aadf4;
+  --color-bg-primary: #24273a;
+  --color-bg-secondary: #1e2030;
+  --color-bg-tertiary: #1e2030;
+  --color-border-primary: #494d64;
+  --color-border-secondary: #363a4f;
+  --color-border-tertiary: #5b6078;
+  --color-kbd-foreground: #f7f8fd;
+  --color-markdown-blockquote-border: #c6a0f6;
+  --color-markdown-table-border: #494d64;
+  --color-markdown-table-tr-border: #363a4f;
+  --color-markdown-code-bg: #363a4f;
+}
+
+body {
+  background: #0f0e16;
+}
+
+#page-ctn {
+  max-width: 1200px;
+}
+
+.markdown-body,
+#page-header {
+  font-family: "MonaspiceXe Nerd Font", "Monaspace Xenon", monospace;
+}
+
+.markdown-body {
+  font-size: 14px;
+}
+
+.markdown-body h1 {
+  color: #ed8796;
+}
+
+.markdown-body h2 {
+  color: #f5a97f;
+}
+
+.markdown-body h3 {
+  color: #eed49f;
+}
+
+.markdown-body h4 {
+  color: #a6da95;
+}
+
+.markdown-body h5 {
+  color: #7dc4e4;
+}
+
+.markdown-body h6 {
+  color: #b7bdf8;
+}
+
+.markdown-body pre,
+.markdown-body code,
+.markdown-body kbd {
+  font-family: "MonaspiceAr Nerd Font Mono", "Monaspace Argon", monospace;
+}
+
+.markdown-body input[type="checkbox"] {
+  accent-color: #c6a0f6;
+}
+
+.markdown-body ::selection,
+#page-header ::selection {
+  color: #f7f8fd;
+  background: #494d64;
+}
+
+/* This preview is always dark; keep the filename but hide the light-mode switch. */
+#toggle-theme {
+  display: none;
+}

@@ -1,5 +1,6 @@
 local servers = {
   "vtsls",
+  "svelte",
   "biome",
   "html",
   "cssls",
@@ -7,10 +8,27 @@ local servers = {
   "lua_ls",
 }
 
+require("mason").setup()
+
 vim.lsp.config("vtsls", {
   settings = {
     vtsls = {
       autoUseWorkspaceTsdk = true,
+      tsserver = {
+        globalPlugins = {
+          {
+            name = "typescript-svelte-plugin",
+            location = vim.fs.joinpath(
+              require("mason.settings").current.install_root_dir,
+              "packages",
+              "svelte-language-server",
+              "node_modules",
+              "typescript-svelte-plugin"
+            ),
+            enableForWorkspaceTypeScriptVersions = true,
+          },
+        },
+      },
       experimental = {
         completion = {
           enableServerSideFuzzyMatch = true,
@@ -50,8 +68,6 @@ vim.lsp.config("lua_ls", {
     },
   },
 })
-
-require("mason").setup()
 
 require("mason-lspconfig").setup {
   ensure_installed = servers,

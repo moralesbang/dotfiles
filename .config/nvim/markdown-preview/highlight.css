@@ -1,0 +1,120 @@
+/* Catppuccin Highlight.js 1.0.1, Macchiato palette (MIT).
+ * https://github.com/catppuccin/highlightjs
+ * Adapted for the plugin's <pre class="hljs"><code> markup and Highlight.js 10.
+ */
+.markdown-body pre.hljs {
+  color: #f7f8fd;
+  background: #1e2030;
+}
+
+.hljs-keyword,
+.hljs-variable,
+.hljs-variable.language_,
+.hljs-name,
+.hljs-selector-attr {
+  color: #c6a0f6;
+}
+
+.hljs-built_in,
+.hljs-doctag {
+  color: #ed8796;
+}
+
+.hljs-type,
+.hljs-class .hljs-title,
+.hljs-title.class_,
+.hljs-selector-tag {
+  color: #eed49f;
+}
+
+.hljs-literal,
+.hljs-number,
+.hljs-variable.constant_,
+.hljs-meta {
+  color: #f5a97f;
+}
+
+.hljs-operator {
+  color: #91d7e3;
+}
+
+.hljs-punctuation {
+  color: #b8c0e0;
+}
+
+.hljs-property,
+.hljs-tag,
+.hljs-bullet,
+.hljs-formula,
+.hljs-selector-class,
+.hljs-selector-pseudo {
+  color: #8bd5ca;
+}
+
+.hljs-regexp {
+  color: #f5bde6;
+}
+
+.hljs-string,
+.hljs-char.escape_,
+.hljs-attribute,
+.hljs-code,
+.hljs-meta-string {
+  color: #a6da95;
+}
+
+.hljs-subst {
+  color: #a5adcb;
+}
+
+.hljs-symbol,
+.hljs-template-tag,
+.hljs-template-variable {
+  color: #f0c6c6;
+}
+
+.hljs-title,
+.hljs-title.function_,
+.hljs-section,
+.hljs-attr,
+.hljs-selector-id {
+  color: #8aadf4;
+}
+
+.hljs-params {
+  color: #f7f8fd;
+}
+
+.hljs-comment {
+  color: #939ab7;
+}
+
+.hljs-emphasis {
+  color: #ed8796;
+  font-style: italic;
+}
+
+.hljs-strong {
+  color: #ed8796;
+  font-weight: bold;
+}
+
+.hljs-link {
+  color: #7dc4e4;
+  font-style: italic;
+}
+
+.hljs-quote {
+  color: #a6da95;
+  font-style: italic;
+}
+
+.hljs-addition {
+  color: #a6da95;
+  background: rgba(166, 218, 149, 0.15);
+}
+
+.hljs-deletion {
+  color: #ed8796;
+  background: rgba(237, 135, 150, 0.15);
+}

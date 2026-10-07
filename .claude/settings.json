@@ -1,0 +1,96 @@
+{
+  "env": {
+    "EDITOR": "nvim",
+    "VISUAL": "nvim"
+  },
+  "permissions": {
+    "allow": [
+      "mcp__claude_ai_Linear"
+    ],
+    "deny": [
+      "EnterPlanMode",
+      "ExitPlanMode",
+      "DesignSync",
+      "NotebookEdit",
+      "PushNotification",
+      "RemoteTrigger",
+      "ReportFindings",
+      "ScheduleWakeup",
+      "CronCreate",
+      "CronDelete",
+      "CronList"
+    ],
+    "ask": [],
+    "defaultMode": "auto",
+    "additionalDirectories": [
+      "/tmp"
+    ]
+  },
+  "model": "opus",
+  "disableClaudeAiConnectors": false,
+  "disableBundledSkills": true,
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '/Users/moralesbang/.claude/hooks/herdr-agent-state.sh' session",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "disableArtifact": true,
+  "statusLine": {
+    "type": "command",
+    "command": "bunx -y ccstatusline@latest",
+    "padding": 0
+  },
+  "enabledPlugins": {
+    "context7@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "mattpocock-skills@claude-plugins-official": true,
+    "codex@openai-codex": true
+  },
+  "extraKnownMarketplaces": {
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
+    }
+  },
+  "feedbackDrafts": "quiet",
+  "effortLevel": "high",
+  "modelSettings": {
+    "claude-sonnet-5": {
+      "effortLevel": "medium"
+    },
+    "claude-opus-5": {
+      "effortLevel": "high"
+    },
+    "claude-fable-5": {
+      "effortLevel": "high"
+    },
+    "claude-fable-5-1": {
+      "effortLevel": "high"
+    },
+    "claude-opus-5-5": {
+      "effortLevel": "xhigh"
+    }
+  },
+  "promptSuggestionEnabled": false,
+  "dialogExpiry": "5m",
+  "tui": "fullscreen",
+  "autoMemoryEnabled": false,
+  "skipDangerousModePermissionPrompt": true,
+  "theme": "custom:catppuccin-macchiato",
+  "editorMode": "normal",
+  "autoCompactEnabled": true,
+  "autoContinueAtUsageLimit": false,
+  "agentPushNotifEnabled": true,
+  "voiceEnabled": false
+}

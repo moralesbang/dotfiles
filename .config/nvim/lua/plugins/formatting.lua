@@ -11,6 +11,8 @@ conform.setup {
     json = biome,
     jsonc = biome,
     css = biome,
+    -- The Svelte LSP bundles Prettier and prettier-plugin-svelte.
+    svelte = { lsp_format = "fallback" },
   },
   formatters = {
     -- Avoid changing projects that do not opt in to Biome.

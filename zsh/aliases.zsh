@@ -6,6 +6,7 @@ alias tree='eza --tree --icons'
 
 alias cc='claude'
 alias reload='source "$ZDOTDIR/.zshrc"'
+alias gst='git status'
 alias gco='git checkout'
 alias gfo='git fetch origin'
 alias ggl='git pull origin $(git branch --show-current)'
