@@ -1,11 +1,10 @@
 ---
 name: owlet-resolve-pr
-description: Answers a pull request's unresolved review threads — fixes each one, replies in it, and resolves it
-argument-hint: [pr]
+description: Answers the current branch's pull request unresolved review threads — fixes each one, replies in it, and resolves it
 disable-model-invocation: true
-allowed-tools: Bash(git *), Bash(gh *), Read, Edit, Grep
-model: sonnet
-effort: medium
+allowed-tools: Bash(git *), Bash(gh *), Read, Edit, Grep, AskUserQuestion
+model: opus
+effort: high
 ---
 
 ## Context
@@ -13,22 +12,22 @@ effort: medium
 - Current branch: !`git branch --show-current`
 - Uncommitted changes: !`git status --short`
 
-Answer every unresolved review **thread** on the pull request named by `$ARGUMENTS`, or on the current branch's PR when that is empty.
+Answer every unresolved review **thread** on the current branch's pull request. The skill takes no arguments — the branch picks the PR.
 
 A reply carries a **receipt** — the sha that proves the fix is pushed. No claim without a receipt, so the commit and push in §6 come before any reply in §7.
 
 ## 1. Resolve the target
 
-`gh pr view <pr> --json number,headRefName,url` resolves the PR. `gh repo view --json nameWithOwner` gives the `<owner>/<repo>` the API calls need.
+`gh pr view --json number,url` resolves the current branch's PR. `gh repo view --json nameWithOwner` gives the `<owner>/<repo>` the API calls need.
 
 Two conditions stop the run before it touches anything:
 
 | Condition | Why it stops |
 |---|---|
 | Uncommitted changes in the context above | This run lands one commit covering every fix; a dirty tree buries unrelated work in it. |
-| Head branch is not the current branch | Fixes have to land on the branch under review. |
+| No open PR on the current branch | There is nothing to answer, and suggesting one is not this skill's job. |
 
-Report the reason in one line and end.
+Report it in one line and end — `😑 owlet — <reason>`, as in `😑 owlet — no open PR on branch feat/foo` or `😑 owlet — uncommitted changes, commit or stash first`.
 
 ## 2. Fetch the threads
 
@@ -69,7 +68,7 @@ Every thread lands in exactly one verdict:
 | `FIX` | The concern is real and you know the change. | Edit, reply with the receipt, resolve. |
 | `ADDRESSED` | `isOutdated`, and the code at that path no longer carries the concern. | Reply naming the sha that already fixed it, resolve. No edit. |
 | `PUSHBACK` | The comment is wrong for this codebase, and you can show it. | Reply with the reasoning. **Leave open** — the reviewer owns the close. |
-| `HAND OFF` | Needs product input, or stays ambiguous after reading the code. | Nothing posted, nothing resolved. It comes back to you in §8. |
+| `HAND OFF` | Needs product input, or stays ambiguous after reading the code. | Nothing posted, nothing resolved. §8 hands it back to you. |
 
 The split between `PUSHBACK` and `HAND OFF` is the difference between knowing and not: **argue in public, ask in private.** Confident the comment is wrong → say so in the thread. Unsure what it wants → hand it off and let the user answer.
 
@@ -79,19 +78,21 @@ Done when every numbered thread has a verdict and, for `FIX`, the specific edit 
 
 ## 4. Offer the plan
 
-One numbered line per thread, in the §2 order:
+A heading, a summary line, and one table row per thread, in the §2 order. Each verdict wears its emoji: 🔧 `FIX` · ✅ `ADDRESSED` · ⛔ `PUSHBACK` · 🙋 `HAND OFF`. The `Author` cell carries the human/bot label and any severity marker; `Plan` names the edit, the argument, the older sha, or the open question.
 
-```
-PLAN — #2290, 4 threads
+```markdown
+### owlet · PR #2290 · plan
 
-1 locale/en/general.json:26  hu-reviewer (bot) [Important]
-  FIX      add `trigger.tooltip` and `oli.role` to the copy table
-2 locale/es/goals.json:8  polbac (human)
-  PUSHBACK key has 3 refs (goals.json:8, admin/audience.tsx:14) — removing it breaks the picker
-3 locale/en/foo.json:12  hu-reviewer (bot)  outdated
-  ADDRESSED already fixed in 9f34357
-4 locale/es/bar.json:4  polbac (human)
-  HAND OFF all 20 locales, or es only? PR only touches es
+**1 fix** · 1 pushback · 1 addressed · 1 needs input
+
+| # | Verdict | Location | Author | Plan |
+|---|---|---|---|---|
+| 1 | 🔧 `FIX` | `locale/en/general.json:26` | hu-reviewer (bot) · [Important] | Add `trigger.tooltip` and `oli.role` to the copy table |
+| 2 | ⛔ `PUSHBACK` | `locale/es/goals.json:8` | polbac (human) | Key has 3 refs (`goals.json:8`, `admin/audience.tsx:14`) — removing it breaks the picker |
+| 3 | ✅ `ADDRESSED` | `locale/en/foo.json:12` | hu-reviewer (bot) · outdated | Already fixed in `9f34357` |
+| 4 | 🙋 `HAND OFF` | `locale/es/bar.json:4` | polbac (human) | All 20 locales, or `es` only? PR only touches `es` |
+
+👉 `go` runs everything · `go except 2` / `just 1 and 4` runs a subset · anything else replans
 ```
 
 Then wait. `go` runs the whole plan; `go except 2` or `just 1 and 4` runs a subset. Anything else is a replan, not an execution.
@@ -107,7 +108,7 @@ Then find this repo's own check and run it, scoped to the changed files: `CLAUDE
 | Result | Next |
 |---|---|
 | Green | §6. |
-| Red, and the cause is one of your edits | Fix it and re-run. Twice red on the same edit is a hand off for that thread — drop it from the run. |
+| Red, and the cause is one of your edits | Fix it and re-run. Twice red on the same edit turns that thread into a `HAND OFF` — drop it from the run; §8 reports it. |
 | No check discoverable | Say so in one line and continue to §6. |
 
 Done when every approved `FIX` is edited and the check is green, skipped as unavailable, or reported red.
@@ -156,17 +157,24 @@ Done when every approved thread has its reply posted, and every `FIX` and `ADDRE
 
 ## 8. Report
 
-One line per numbered thread, shaped like the family's other guards:
+The same heading and table as §4, now carrying outcomes instead of plans. The summary line counts what happened: resolved, left open, needs input, skipped — drop any count that is zero. `SKIPPED` wears ⏭️.
 
-```
-owlet #2290 FIX       1 general.json:26      fixed a1b2c3, resolved
-owlet #2290 PUSHBACK  2 es/goals.json:8      replied, left open
-owlet #2290 ADDRESSED 3 en/foo.json:12       resolved
-owlet #2290 HAND OFF  4 es/bar.json:4        nothing posted
-  needs you: all 20 locales, or es only?
-owlet #2290 SKIPPED   5 es/baz.json:2        not approved
+```markdown
+### owlet · PR #2290
+
+**2 resolved** · 1 left open · 1 needs input · 1 skipped
+
+| # | Status | Location | Outcome |
+|---|---|---|---|
+| 1 | 🔧 `FIX` | `general.json:26` | Committed `a1b2c3` · resolved |
+| 2 | ⛔ `PUSHBACK` | `es/goals.json:8` | Replied · left open |
+| 3 | ✅ `ADDRESSED` | `en/foo.json:12` | Resolved |
+| 4 | 🙋 `HAND OFF` | `es/bar.json:4` | Nothing posted |
+| 5 | ⏭️ `SKIPPED` | `es/baz.json:2` | Not approved |
+
+**Needs you · #4:** Update all 20 locales, or `es` only?
 ```
 
-Every `HAND OFF` adds its `needs you:` line — that line is the whole point of the verdict.
+Every `HAND OFF` adds its **Needs you** line under the table — that line is the whole point of the verdict.
 
 Close with the count still open on the PR and, when that count is zero, say the PR is ready to merge.
