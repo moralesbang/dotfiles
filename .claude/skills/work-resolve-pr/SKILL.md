@@ -1,5 +1,5 @@
 ---
-name: owlet-resolve-pr
+name: work-resolve-pr
 description: Answers the current branch's pull request unresolved review threads — fixes each one, replies in it, and resolves it
 disable-model-invocation: true
 allowed-tools: Bash(git *), Bash(gh *), Read, Edit, Grep, AskUserQuestion
@@ -27,7 +27,7 @@ Two conditions stop the run before it touches anything:
 | Uncommitted changes in the context above | This run lands one commit covering every fix; a dirty tree buries unrelated work in it. |
 | No open PR on the current branch | There is nothing to answer, and suggesting one is not this skill's job. |
 
-Report it in one line and end — `😑 owlet — <reason>`, as in `😑 owlet — no open PR on branch feat/foo` or `😑 owlet — uncommitted changes, commit or stash first`.
+Report it in one line and end — `😑 work — <reason>`, as in `😑 work — no open PR on branch feat/foo` or `😑 work — uncommitted changes, commit or stash first`.
 
 ## 2. Fetch the threads
 
@@ -81,7 +81,7 @@ Done when every numbered thread has a verdict and, for `FIX`, the specific edit 
 A heading, a summary line, and one table row per thread, in the §2 order. Each verdict wears its emoji: 🔧 `FIX` · ✅ `ADDRESSED` · ⛔ `PUSHBACK` · 🙋 `HAND OFF`. The `Author` cell carries the human/bot label and any severity marker; `Plan` names the edit, the argument, the older sha, or the open question.
 
 ```markdown
-### owlet · PR #2290 · plan
+### work · PR #2290 · plan
 
 **1 fix** · 1 pushback · 1 addressed · 1 needs input
 
@@ -118,7 +118,7 @@ Done when every approved `FIX` is edited and the check is green, skipped as unav
 One commit for the whole run:
 
 ```
-fix(review): address review comments on #<pr> [owlet]
+fix(review): address review comments on #<pr> [work]
 ```
 
 Push it. `git rev-parse --short HEAD` is the **receipt** every reply in §7 cites.
@@ -160,7 +160,7 @@ Done when every approved thread has its reply posted, and every `FIX` and `ADDRE
 The same heading and table as §4, now carrying outcomes instead of plans. The summary line counts what happened: resolved, left open, needs input, skipped — drop any count that is zero. `SKIPPED` wears ⏭️.
 
 ```markdown
-### owlet · PR #2290
+### work · PR #2290
 
 **2 resolved** · 1 left open · 1 needs input · 1 skipped
 
