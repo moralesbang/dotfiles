@@ -1,12 +1,8 @@
 {
   "env": {
-    "EDITOR": "nvim",
-    "VISUAL": "nvim"
+    "EDITOR": "nvim"
   },
   "permissions": {
-    "allow": [
-      "mcp__claude_ai_Linear"
-    ],
     "deny": [
       "EnterPlanMode",
       "ExitPlanMode",
@@ -19,11 +15,6 @@
       "CronCreate",
       "CronDelete",
       "CronList"
-    ],
-    "ask": [],
-    "defaultMode": "auto",
-    "additionalDirectories": [
-      "/tmp"
     ]
   },
   "model": "opus",
@@ -52,14 +43,9 @@
   "feedbackDrafts": "quiet",
   "effortLevel": "high",
   "promptSuggestionEnabled": false,
-  "dialogExpiry": "5m",
   "tui": "fullscreen",
   "autoMemoryEnabled": false,
-  "skipDangerousModePermissionPrompt": true,
-  "theme": "custom:catppuccin-macchiato",
-  "editorMode": "normal",
-  "autoCompactEnabled": true,
-  "autoContinueAtUsageLimit": false,
-  "agentPushNotifEnabled": true,
-  "voiceEnabled": false
+  "theme": "custom:catppuccin-mocha",
+  "autoCompactEnabled": false,
+  "agentPushNotifEnabled": false
 }
