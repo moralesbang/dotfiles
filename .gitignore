@@ -6,16 +6,9 @@ zsh/.zsh_sessions/
 /.claude/*
 !/.claude/CLAUDE.md
 !/.claude/settings.json
-!/.claude/mcp.json
-!/.claude/.mcp.json
-!/.claude/statusline.sh
-!/.claude/agents/
-!/.claude/bang/
 !/.claude/hooks/
-!/.claude/rules/
 !/.claude/scripts/
 !/.claude/skills/
-!/.claude/standards/
 !/.claude/themes/
 /.claude/skills/synced/
 /.claude/skills/hu-add-specific-permission/
