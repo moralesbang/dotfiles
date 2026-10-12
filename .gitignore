@@ -7,7 +7,6 @@ zsh/.zsh_sessions/
 !/.claude/CLAUDE.md
 !/.claude/settings.json
 !/.claude/hooks/
-!/.claude/scripts/
 !/.claude/skills/
 !/.claude/themes/
 /.claude/skills/synced/
