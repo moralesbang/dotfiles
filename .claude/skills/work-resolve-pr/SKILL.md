@@ -2,7 +2,7 @@
 name: work-resolve-pr
 description: Answers the current branch's pull request unresolved review threads — fixes each one, replies in it, and resolves it
 disable-model-invocation: true
-allowed-tools: Bash(git *), Bash(gh *), Read, Edit, Grep, AskUserQuestion
+allowed-tools: Bash(git *), Bash(gh *), Read, Edit, Grep, AskUserQuestion, Skill
 model: opus
 effort: high
 ---
@@ -115,13 +115,7 @@ Done when every approved `FIX` is edited and the check is green, skipped as unav
 
 ## 6. Mint the receipt
 
-One commit for the whole run:
-
-```
-fix(review): address review comments on #<pr> [work]
-```
-
-Push it. `git rev-parse --short HEAD` is the **receipt** every reply in §7 cites.
+One commit for the whole run, its message from `work-git-commit`. Push it. `git rev-parse --short HEAD` is the **receipt** every reply in §7 cites.
 
 `ADDRESSED` threads carry their own older receipt — the sha found in §3 — so a run of nothing but `ADDRESSED` and `PUSHBACK` skips this step entirely.
 
