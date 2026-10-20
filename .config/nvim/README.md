@@ -120,7 +120,7 @@ Styles live in `markdown-preview/macchiato.css` and `markdown-preview/highlight.
 
 - Tree-sitter highlights `.svelte` templates and embedded JavaScript, TypeScript, and CSS. `nvim-treesitter` installs the required parsers automatically and updates them when the plugin is updated with `vim.pack`.
 - Mason installs `svelte-language-server`; `nvim-lspconfig` enables diagnostics, completion, hover, navigation, and rename in Svelte buffers.
-- `vtsls` loads Mason's bundled `typescript-svelte-plugin` for navigation and diagnostics involving Svelte components from JavaScript/TypeScript files, including when using workspace TypeScript versions.
+- JavaScript/TypeScript files use the native TypeScript 7 server (`tsc --lsp`), which does not support tsserver plugins: navigation from `.ts`/`.js` files into Svelte components is not available.
 - Conform uses the Svelte LSP's Prettier-based formatter on save and with `<leader>cf`. Existing Biome formatting for other filetypes is unchanged. The LSP honors project Prettier configuration; no separate global Prettier installation is needed.
 
 Parser installation requires `tree-sitter-cli` >= 0.26.1, a C compiler, `curl`, and `tar`. On macOS, install the CLI with `brew install tree-sitter-cli`. After the initial asynchronous installation finishes, reopen any Svelte buffer that was opened before its parser was available.

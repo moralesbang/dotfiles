@@ -1,5 +1,4 @@
 local servers = {
-  "vtsls",
   "svelte",
   "biome",
   "html",
@@ -10,39 +9,10 @@ local servers = {
 
 require("mason").setup()
 
-vim.lsp.config("vtsls", {
-  settings = {
-    vtsls = {
-      autoUseWorkspaceTsdk = true,
-      tsserver = {
-        globalPlugins = {
-          {
-            name = "typescript-svelte-plugin",
-            location = vim.fs.joinpath(
-              require("mason.settings").current.install_root_dir,
-              "packages",
-              "svelte-language-server",
-              "node_modules",
-              "typescript-svelte-plugin"
-            ),
-            enableForWorkspaceTypeScriptVersions = true,
-          },
-        },
-      },
-      experimental = {
-        completion = {
-          enableServerSideFuzzyMatch = true,
-        },
-      },
-    },
-    typescript = {
-      updateImportsOnFileMove = { enabled = "always" },
-    },
-    javascript = {
-      updateImportsOnFileMove = { enabled = "always" },
-    },
-  },
-})
+-- Native TypeScript 7 language server (`tsc --lsp`). Not managed by Mason:
+-- it uses the project's `node_modules/.bin/tsc` when it is 7.0+, otherwise
+-- the global one (`bun add -g typescript`).
+vim.lsp.enable("tsc")
 
 -- Add project-specific JSON schemas for package.json, tsconfig.json, and other
 -- common configuration files.

@@ -35,10 +35,15 @@ vim.api.nvim_create_autocmd("FileType", {
     -- Neovim ships the Markdown parsers; enable their highlighting explicitly.
     vim.treesitter.start(event.buf)
 
+    -- Soft-wrap long paragraphs at word boundaries, keeping list indentation.
+    vim.opt_local.wrap = true
+    vim.opt_local.linebreak = true
+    vim.opt_local.breakindent = true
+
     vim.keymap.set("n", "<leader>mr", markdown.buf_toggle, {
       buffer = event.buf,
       desc = "Toggle Markdown rendering",
     })
   end,
-  desc = "Enable Markdown highlighting and rendering toggle",
+  desc = "Enable Markdown highlighting, soft wrap and rendering toggle",
 })
