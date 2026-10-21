@@ -1,18 +1,19 @@
-zsh/.zsh_history
-zsh/.zcompdump*
-zsh/.zsh_sessions/
+.DS_Store
+
+shell/zsh/.zsh_history
+shell/zsh/.zcompdump*
+shell/zsh/.zsh_sessions/
 
 # Claude Code: track configuration, not local runtime data.
-/.claude/*
-!/.claude/CLAUDE.md
-!/.claude/settings.json
-!/.claude/hooks/
-/.claude/hooks/herdr-*
-/.claude/hooks/local/
-!/.claude/themes/
-/.claude/**/.DS_Store
-/.claude/**/.env
-/.claude/**/.env.*
-/.claude/**/settings.local.json
-/.claude/**/*.bak
-/.claude/**/node_modules/
+/agents/claude-code/*
+!/agents/claude-code/CLAUDE.md
+!/agents/claude-code/settings.json
+!/agents/claude-code/hooks/
+/agents/claude-code/hooks/herdr-*
+/agents/claude-code/hooks/local/
+!/agents/claude-code/themes/
+/agents/claude-code/**/.env
+/agents/claude-code/**/.env.*
+/agents/claude-code/**/settings.local.json
+/agents/claude-code/**/*.bak
+/agents/claude-code/**/node_modules/

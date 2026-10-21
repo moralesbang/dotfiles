@@ -1,4 +1,4 @@
-export ZDOTDIR="$HOME/Projects/dotfiles/zsh"
+export ZDOTDIR="${${(%):-%x}:A:h}"  # this file's real directory, wherever the repo lives
 path=("$HOME/.local/bin" ${path:#$HOME/.local/bin})
 path=("$HOME/.bun/bin" ${path:#$HOME/.bun/bin})
 path=("$HOME/Projects/Work/_workspace/scripts" ${path:#$HOME/Projects/Work/_workspace/scripts})

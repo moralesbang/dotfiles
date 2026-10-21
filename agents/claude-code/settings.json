@@ -36,12 +36,12 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash '/Users/moralesbang/.claude/hooks/block-skills-all-agents.sh'",
+            "command": "bash \"$HOME/.claude/hooks/block-skills-all-agents.sh\"",
             "timeout": 10
           },
           {
             "type": "command",
-            "command": "bash '/Users/moralesbang/.claude/skills/work-dependency-bump/scripts/check.sh' --hook",
+            "command": "bash \"$HOME/.claude/skills/work-dependency-bump/scripts/check.sh\" --hook",
             "timeout": 10
           }
         ]
