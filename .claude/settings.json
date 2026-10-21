@@ -4,6 +4,7 @@
   },
   "permissions": {
     "deny": [
+      "Read(~/Projects/Work/.secrets/**)",
       "EnterPlanMode",
       "ExitPlanMode",
       "DesignSync",
