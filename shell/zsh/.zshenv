@@ -15,6 +15,9 @@ export DEJA_TOGGLE_EMPTY_KEY=
 # Lives in .zshenv (not .zshrc) so non-interactive shells — e.g. Claude Code's Bash
 # tool — pick it up too. gh honors GH_TOKEN over the active account; the token is read
 # from the keyring, not stored. Absolute gh path: PATH is not set up yet at this point.
+# Outside Work the active account applies: keep it on the personal one (moralesbang).
+# The chpwd hook is registered for every shell, so a `cd` inside a Claude Code Bash
+# command switches accounts too.
 _gh_auto_account() {
   if [[ "$PWD" == "$HOME/Projects/Work"* ]]; then
     export GH_TOKEN="$(/opt/homebrew/bin/gh auth token --user jmorales-hu 2>/dev/null)"
@@ -23,10 +26,8 @@ _gh_auto_account() {
   fi
 }
 _gh_auto_account
-if [[ -o interactive ]]; then
-  autoload -U add-zsh-hook
-  add-zsh-hook chpwd _gh_auto_account
-fi
+autoload -U add-zsh-hook
+add-zsh-hook chpwd _gh_auto_account
 
 # --- nvim: default file-picker scope inside ~/Projects/Work ---
 # Relative to the repo root; nvim falls back to the whole repo if it doesn't exist there.
