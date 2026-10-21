@@ -14,13 +14,19 @@ export DEJA_TOGGLE_EMPTY_KEY=
 # --- gh CLI: auto-select work account inside ~/Projects/Work ---
 # Lives in .zshenv (not .zshrc) so non-interactive shells — e.g. Claude Code's Bash
 # tool — pick it up too. gh honors GH_TOKEN over the active account; the token is read
-# from the keyring, not stored. Absolute gh path: PATH is not set up yet at this point.
+# from the keyring, not stored. PATH may lack Homebrew here, hence the absolute fallback.
 # Outside Work the active account applies: keep it on the personal one (moralesbang).
 # The chpwd hook is registered for every shell, so a `cd` inside a Claude Code Bash
 # command switches accounts too.
 _gh_auto_account() {
   if [[ "$PWD" == "$HOME/Projects/Work"* ]]; then
-    export GH_TOKEN="$(/opt/homebrew/bin/gh auth token --user jmorales-hu 2>/dev/null)"
+    local gh_bin="${commands[gh]}"
+    [[ -n "$gh_bin" ]] || gh_bin=/opt/homebrew/bin/gh
+    if [[ -x "$gh_bin" ]]; then
+      export GH_TOKEN="$("$gh_bin" auth token --user jmorales-hu 2>/dev/null)"
+    else
+      unset GH_TOKEN
+    fi
   else
     unset GH_TOKEN
   fi
@@ -45,17 +51,24 @@ fi
 
 # --- node: use the version pinned by the nearest .nvmrc ---
 # Prepends that nvm-installed version's bin to PATH, without sourcing nvm.sh (~0.5s).
-# Outside a pinned project, or if the version isn't installed, Homebrew's node stays.
+# Outside a pinned project, or if the version isn't installed, Homebrew's node stays;
+# without any other node (Linux), the newest nvm-installed version is used instead.
 # Registered for every shell, not just interactive ones, so Claude Code's Bash tool
 # runs the project's node too. .zprofile calls it again after `brew shellenv`.
 _node_auto_version() {
+  # Glob qualifiers below need zsh defaults; host shells (e.g. Claude Code) may differ.
+  emulate -L zsh
   path=(${path:#$HOME/.nvm/versions/node/*})
-  local dir="$PWD"
+  local dir="$PWD" bin
   while [[ -n "$dir" && ! -f "$dir/.nvmrc" ]]; do dir="${dir%/*}"; done
-  [[ -f "$dir/.nvmrc" ]] || return
-  local version="$(<"$dir/.nvmrc")"
-  version="v${${version//[[:space:]]/}#v}"
-  local bin="$HOME/.nvm/versions/node/$version/bin"
+  if [[ -f "$dir/.nvmrc" ]]; then
+    local version="$(<"$dir/.nvmrc")"
+    version="v${${version//[[:space:]]/}#v}"
+    bin="$HOME/.nvm/versions/node/$version/bin"
+  fi
+  if [[ ! -d "$bin" ]] && (( ! $+commands[node] )); then
+    bin=($HOME/.nvm/versions/node/v*/bin(N/nOn[1]))
+  fi
   [[ -d "$bin" ]] && path=("$bin" $path)
 }
 _node_auto_version

@@ -17,3 +17,11 @@ eval "$(atuin init zsh --disable-up-arrow)"
 
 # zoxide: smarter cd (`z`, `zi`)
 eval "$(zoxide init zsh)"
+
+# nvm: sourced on first use (~0.5s); .zshenv already puts the right node on PATH.
+export NVM_DIR="$HOME/.nvm"
+nvm() {
+  unfunction nvm
+  source "$NVM_DIR/nvm.sh" --no-use
+  nvm "$@"
+}
