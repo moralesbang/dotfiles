@@ -1,0 +1,25 @@
+{
+  "$schema": "https://opencode.ai/v2/cli.json",
+  "theme": {
+    "name": "catppuccin-macchiato-transparent",
+    "mode": "system"
+  },
+  "diffs": {
+    "wrap": "word"
+  },
+  "session": {
+    "sidebar": "auto",
+    "scrollbar": false,
+    "thinking": "hide"
+  },
+  "animations": true,
+  "plugins": [
+    "./herdr-opencode"
+  ],
+  "terminal": {
+    "copy": "manual"
+  },
+  "prompt": {
+    "editor": false
+  }
+}
