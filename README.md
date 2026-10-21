@@ -5,7 +5,9 @@ mount it into the paths the tool reads. Folders are named by what they hold, not
 land; each module's **Links** say where that is. The clone can live anywhere (`<dotfiles>` below);
 the convention is `~/Projects/dotfiles/`.
 
-Platform: macOS with Homebrew at `/opt/homebrew`.
+Platforms: macOS with Homebrew at `/opt/homebrew`, and Arch-based Linux (CachyOS) with `pacman`.
+Install cells read `macOS` · `Linux`; a single command applies to both. What differs per OS lives
+in the module itself, picked at link time (see `ghostty`).
 
 | module | folder | what |
 |---|---|---|
@@ -61,8 +63,9 @@ Run each chosen module's **Verify** command.
 
 | requirement | check | install |
 |---|---|---|
-| Homebrew | `test -x /opt/homebrew/bin/brew` | [brew.sh](https://brew.sh) |
-| zinit, starship, fzf, atuin, zoxide, eza, lazygit, gh | `command -v <tool>` | `brew install <tool>` |
+| macOS only: Homebrew | `test -x /opt/homebrew/bin/brew` | [brew.sh](https://brew.sh) |
+| starship, fzf, atuin, zoxide, eza, lazygit, gh | `command -v <tool>` | `brew install <tool>` · `pacman -S <tool>` (`github-cli` for gh) |
+| zinit | `brew --prefix zinit` · `test -r ~/.local/share/zinit/zinit.git/zinit.zsh` | `brew install zinit` · `git clone https://github.com/zdharma-continuum/zinit ~/.local/share/zinit/zinit.git` |
 | Nerd Font in the terminal (eza icons, prompt) | ask the user | see `ghostty` |
 | **Optional**: Bun (completions) | `command -v bun` | `curl -fsSL https://bun.sh/install \| bash` |
 | **Optional**: nvm (node pinned by `.nvmrc`) | `test -d ~/.nvm/versions/node` | [nvm](https://github.com/nvm-sh/nvm#installing-and-updating) |
@@ -80,10 +83,10 @@ harness's `_workspace/scripts` on `PATH`, and nvim's `NVIM_PICK_SCOPE`.
 
 | requirement | check | install |
 |---|---|---|
-| Neovim 0.12+ (`vim.pack`) | `nvim --version` | `brew install neovim` |
-| ripgrep (pickers) | `command -v rg` | `brew install ripgrep` |
-| tree-sitter CLI and a C compiler (parsers) | `command -v tree-sitter cc` | `brew install tree-sitter-cli`; `xcode-select --install` |
-| Node (Mason installs the LSP servers) | `command -v npm` | `brew install node` |
+| Neovim 0.12+ (`vim.pack`) | `nvim --version` | `brew install neovim` · `pacman -S neovim` |
+| ripgrep (pickers) | `command -v rg` | `brew install ripgrep` · `pacman -S ripgrep` |
+| tree-sitter CLI and a C compiler (parsers) | `command -v tree-sitter cc` | `brew install tree-sitter-cli`; `xcode-select --install` · `pacman -S tree-sitter-cli base-devel` |
+| Node (Mason installs the LSP servers) | `command -v npm` | `brew install node` · nvm (zsh puts its newest node on `PATH`) |
 | Nerd Font in the terminal | ask the user | see `ghostty` |
 | **Optional**: TypeScript 7 (`tsc --lsp`) | `command -v tsc` | `bun add -g typescript` |
 
@@ -99,10 +102,16 @@ harness's `_workspace/scripts` on `PATH`, and nvim's `NVIM_PICK_SCOPE`.
 
 | requirement | check | install |
 |---|---|---|
-| Ghostty | `command -v ghostty` | `brew install --cask ghostty` |
-| MonaspiceNe Nerd Font | `ls ~/Library/Fonts \| grep -i monaspice` | `brew install --cask font-monaspice-nerd-font` |
+| Ghostty | `command -v ghostty` | `brew install --cask ghostty` · `pacman -S ghostty` |
+| MonaspiceNe Nerd Font | `fc-list \| grep -i monaspicene` (macOS: `ls ~/Library/Fonts \| grep -i monaspice`) | `brew install --cask font-monaspice-nerd-font` · `pacman -S otf-monaspace-nerd` |
 
-**Links**: `~/.config/ghostty` → `<dotfiles>/terminal/ghostty`.
+**Links**:
+
+- `~/.config/ghostty` → `<dotfiles>/terminal/ghostty`
+- `<dotfiles>/terminal/ghostty/local` → `os/macos` or `os/linux` (relative, gitignored)
+
+`config` holds what both OSes share and includes `local` last. `os/<os>` holds font size,
+opacity and OS-only keys (`macos-*`; Linux: GTK blur CSS, Hyprland accent keybinds, `command`).
 
 **Verify**: `ghostty +validate-config` exits `0`.
 
@@ -111,7 +120,7 @@ harness's `_workspace/scripts` on `PATH`, and nvim's `NVIM_PICK_SCOPE`.
 | requirement | check | install |
 |---|---|---|
 | Claude Code | `command -v claude` | `curl -fsSL https://claude.ai/install.sh \| bash` |
-| jq (hooks) | `command -v jq` | `brew install jq` |
+| jq (hooks) | `command -v jq` | `brew install jq` · `pacman -S jq` |
 | Bun (status line runs `bunx ccstatusline`) | `command -v bun` | `curl -fsSL https://bun.sh/install \| bash` |
 | **Optional**: work-harness (skills, `work-dependency-bump` hook) | `test -d ~/Projects/work-harness` | its `README.md` |
 
@@ -133,7 +142,9 @@ Reference:
 - **Skills**: `skills/` is local. `work-*` and hero skills install from work-harness
   `skills/README.md`. The `block-skills-all-agents.sh` hook blocks installing a skill for every agent.
 - **Local hooks**: `hooks/local/session-start.sh`, when present, runs on `SessionStart`: the place
-  for machine-only integrations.
+  for machine-only integrations. Herdr, for one: its installer drops `hooks/herdr-agent-state.sh`
+  (gitignored) and adds a `SessionStart` entry to `settings.json`. Move that entry's command into
+  `hooks/local/session-start.sh` and drop it from `settings.json`, which is shared.
 - **Themes**: `themes/README.md`.
 
 ### opencode
@@ -145,6 +156,7 @@ Reference:
 **Links**: `~/.config/opencode/themes` → `<dotfiles>/agents/opencode/themes`.
 
 `cli.json` and `tui.jsonc` are a base, not links: copy each into `~/.config/opencode/` when absent.
-Each machine adds its own plugins there.
+Each machine adds its own plugins and picks its theme there: `catppuccin-macchiato-transparent`
+or `catppuccin-mocha-transparent`. Drop the base `tui.jsonc` plugin path on machines without it.
 
 **Verify**: `test -f ~/.config/opencode/themes/catppuccin-macchiato-transparent.json`.

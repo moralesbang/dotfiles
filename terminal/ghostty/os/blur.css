@@ -1,0 +1,13 @@
+/* GTK 4.24 requires an explicit background blur request. */
+window {
+    backdrop-filter: blur(10px);
+}
+
+/* Hide the floating key-sequence overlay (alt+e>a, alt+n>n). */
+.key-state-overlay {
+    opacity: 0;
+    padding: 0;
+    margin: 0;
+    outline-width: 0;
+    background: none;
+}

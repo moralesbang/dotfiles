@@ -3,6 +3,33 @@
 Breaking changes, newest first. Each entry is a migration guide for the agent updating a machine
 that already runs these dotfiles: apply every entry newer than the machine's checkout, in order.
 
+## 2026-10-21: per-OS ghostty, Linux support
+
+The repo now runs on macOS and Arch-based Linux. `terminal/ghostty/config` keeps only what both share
+and includes `terminal/ghostty/local` last; font size, opacity and `macos-*` moved to
+`terminal/ghostty/os/macos` (Linux: `os/linux`). Without `local`, ghostty falls back to its default
+font size and window chrome.
+
+Also changed:
+
+- zsh finds `brew`, `gh` and zinit without Homebrew, falls back to the newest nvm node when no other
+  node is on `PATH`, lazy-loads `nvm`, and sources `wt` from the work-harness checkout first.
+- `cursor_warp.glsl` no longer redeclares `effectiveBlur`, so the diagonal blur applies.
+
+### Migrate
+
+1. **Pull.** Same as the entry below, step 2.
+
+   **Done**: `terminal/ghostty/os/macos` exists.
+
+2. **Link the OS file.** Only on machines that link `ghostty`:
+
+   ```sh
+   ln -sfn os/macos <dotfiles>/terminal/ghostty/local   # os/linux on Linux
+   ```
+
+   **Done**: `ghostty +validate-config` exits `0` and a new window keeps the old font size.
+
 ## 2026-10-21: semantic layout
 
 Folders are now named by module, not by the path they land on. Every link into the repo moves.

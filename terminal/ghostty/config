@@ -1,6 +1,5 @@
 font-family = MonaspiceNe Nerd Font Mono
 font-feature = calt
-font-size = 14
 adjust-cell-height = 8%
 theme = "Catppuccin Mocha"
 
@@ -8,16 +7,13 @@ background = #0f0e16
 foreground = #f7f8fd
 cursor-color = #f5c2e7
 palette = 2=#a1e99b
-background-opacity = 0.9
 background-opacity-cells = true
-background-blur-radius = 20
+background-blur = 20
 
 cursor-style = block
 cursor-style-blink = false
 
 mouse-hide-while-typing = true
-macos-option-as-alt = false
-macos-titlebar-style = hidden
 
 window-decoration = auto
 window-padding-x = 10
@@ -30,3 +26,7 @@ shell-integration-features = no-cursor
 copy-on-select = clipboard
 
 custom-shader = ~/.config/ghostty/shaders/cursor_warp.glsl
+
+# Per-OS settings: `local` is a gitignored symlink to os/macos or os/linux.
+# Last on purpose, so it overrides anything above.
+config-file = ?local

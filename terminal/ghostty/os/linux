@@ -1,0 +1,27 @@
+font-size = 10.5
+background-opacity = 0.96
+command = /usr/bin/zsh
+
+# GTK 4.24 needs an explicit blur request, see blur.css.
+gtk-custom-css = ~/.config/ghostty/os/blur.css
+
+# Accented characters.
+#   ALT + E + <vowel>  ->  á é í ó ú
+#   ALT + N + N         ->  ñ
+# This is the native Ghostty version of the global Hyprland + wtype mapping
+# (see ~/.config/hypr/config/accents.lua). It is only reachable while the
+# global mapping is not active, e.g. if wtype is not installed.
+# The "alt+..." variants are the ones that work while ALT is still held down.
+keybind = alt+e>a=text:á
+keybind = alt+e>e=text:é
+keybind = alt+e>i=text:í
+keybind = alt+e>o=text:ó
+keybind = alt+e>u=text:ú
+keybind = alt+n>n=text:ñ
+
+keybind = alt+e>alt+a=text:á
+keybind = alt+e>alt+e=text:é
+keybind = alt+e>alt+i=text:í
+keybind = alt+e>alt+o=text:ó
+keybind = alt+e>alt+u=text:ú
+keybind = alt+n>alt+n=text:ñ

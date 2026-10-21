@@ -17,3 +17,5 @@ shell/zsh/.zsh_sessions/
 /agents/claude-code/**/settings.local.json
 /agents/claude-code/**/*.bak
 /agents/claude-code/**/node_modules/
+
+terminal/ghostty/local

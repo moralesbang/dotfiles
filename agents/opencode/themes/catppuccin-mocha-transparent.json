@@ -1,0 +1,69 @@
+{
+  "$schema": "https://opencode.ai/theme.json",
+  "base": {
+    "categorical": ["purple", "green", "yellow", "blue", "red", "cyan"],
+    "text": {
+      "base": "#cdd6f4",
+      "muted": "#a6adc8",
+      "faint": "#6c7086",
+      "action": {
+        "primary": {"base": "#cdd6f4", "$disabled": "#9399b2", "$focused": "#89b4fa", "$selected": "#89b4fa"},
+        "secondary": {"base": "#9399b2", "$hovered": "#cdd6f4"},
+        "destructive": {"base": "#f38ba8", "$disabled": "#9399b2"}
+      },
+      "formfield": {"base": "#cdd6f4", "$hovered": "#89b4fa", "$focused": "#89b4fa", "$pressed": "#89b4fa", "$disabled": "#9399b2", "$selected": "#89b4fa"},
+      "feedback": {
+        "error": {"base": "#f38ba8"},
+        "warning": {"base": "#f9e2af"},
+        "success": {"base": "#a6e3a1"},
+        "info": {"base": "#94e2d5"}
+      }
+    },
+    "background": {
+      "base": "transparent",
+      "raised": {"base": "transparent", "high": "transparent", "max": "transparent"},
+      "action": {
+        "primary": {"base": "transparent", "$hovered": "transparent", "$focused": "transparent", "$selected": "transparent"},
+        "secondary": {"base": "transparent"},
+        "destructive": {"base": "transparent"}
+      },
+      "formfield": {"base": "transparent"},
+      "feedback": {
+        "error": {"base": "transparent"},
+        "warning": {"base": "transparent"},
+        "success": {"base": "transparent"},
+        "info": {"base": "transparent"}
+      }
+    },
+    "border": {"base": "#6c7086"},
+    "scrollbar": {"base": "#45475a"},
+    "diff": {
+      "text": {"added": "#a6e3a1", "removed": "#f38ba8", "context": "#9399b2", "hunkHeader": "#fab387"},
+      "background": {"added": "#343e40", "removed": "#402f42", "context": "transparent"},
+      "highlight": {"added": "#475950", "removed": "#5e3f53"},
+      "lineNumber": {"text": "#9399b2", "background": {"added": "transparent", "removed": "transparent"}}
+    },
+    "syntax": {
+      "comment": "#9399b2", "keyword": "#cba6f7", "function": "#89b4fa", "variable": "#f38ba8", "string": "#a6e3a1", "number": "#fab387", "type": "#f9e2af", "operator": "#89dceb", "punctuation": "#cdd6f4"
+    },
+    "markdown": {
+      "text": "#cdd6f4", "heading": "#cba6f7", "link": "#89b4fa", "linkText": "#89dceb", "code": "#a6e3a1", "blockQuote": "#f9e2af", "emphasis": "#f9e2af", "strong": "#fab387", "horizontalRule": "#a6adc8", "listItem": "#89b4fa", "listEnumeration": "#89dceb", "image": "#89b4fa", "imageText": "#89dceb", "codeBlock": "#cdd6f4"
+    },
+    "@dialog": {"background": {"base": "transparent", "action": {"primary": {"$hovered": "transparent"}}}}
+  },
+  "dark": {
+    "hue": {
+      "gray": {"100":"#f4f6ff","200":"#cdd6f4","300":"#b0b7d3","400":"#9399b2","500":"#4d5061","600":"#11111b","700":"#181825","800":"#1e1e2e","900":"#242437"},
+      "red": {"100":"#fdb1c4","200":"#f38ba8","300":"#d3758f","400":"#b35f77","500":"#954b60","600":"#77374a","700":"#5b2435","800":"#401121","900":"#27020f"},
+      "orange": {"100":"#ffdcc5","200":"#fab387","300":"#d99a73","400":"#b9805e","500":"#9a6849","600":"#7c5036","700":"#5f3a23","800":"#432411","900":"#2a1003"},
+      "yellow": {"100":"#ffffff","200":"#f9e2af","300":"#d5c092","400":"#b19f76","500":"#8f7f5b","600":"#6f6141","700":"#504428","800":"#332911","900":"#181001"},
+      "green": {"100":"#d3fecf","200":"#a6e3a1","300":"#8bc287","400":"#71a26d","500":"#588455","600":"#40663d","700":"#294a27","800":"#133012","900":"#021702"},
+      "cyan": {"100":"#c3fff4","200":"#94e2d5","300":"#7ac1b6","400":"#62a297","500":"#4a837a","600":"#33665e","700":"#1c4a43","800":"#062f2a","900":"#001613"},
+      "blue": {"100":"#b3cffd","200":"#89b4fa","300":"#739ad9","400":"#5e80b9","500":"#49689a","600":"#36507c","700":"#233a5f","800":"#112443","900":"#03102a"},
+      "purple": {"100":"#fef0fa","200":"#f5c2e7","300":"#d2a4c6","400":"#b087a5","500":"#906c86","600":"#705168","700":"#52384b","800":"#362030","900":"#1c0b18"},
+      "accent": "$hue.purple",
+      "interactive": "$hue.blue",
+      "neutral": "$hue.gray"
+    }
+  }
+}
