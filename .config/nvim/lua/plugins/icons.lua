@@ -1,9 +1,13 @@
 local icons = require("mini.icons")
 
--- Directory glyphs come from work-harness when it is installed.
-local ok, harness = pcall(dofile, vim.fn.expand("~/Projects/work-harness/editor/mini-icons.lua"))
-
 icons.setup {
-  directory = ok and harness or {},
+  directory = {
+    [".sdd"] = { glyph = "󱪚", hl = "MiniIconsCyan" },
+    [".secrets"] = { glyph = "󱕴", hl = "MiniIconsYellow" },
+    [".worktrees"] = { glyph = "󰘬", hl = "MiniIconsOrange" },
+    ["_workspace"] = { glyph = "󱌼", hl = "MiniIconsPurple" },
+    ["scripts"] = { glyph = "󰞷", hl = "MiniIconsGreen" },
+    ["standards"] = { glyph = "󱓳", hl = "MiniIconsBlue" },
+  },
 }
 icons.mock_nvim_web_devicons()
