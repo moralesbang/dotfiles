@@ -1,0 +1,84 @@
+{
+  "version": 4,
+  "lines": [
+    [
+      {
+        "id": "81d5d384-d5a4-443f-a43e-285a3ae72ab0",
+        "type": "context-length",
+        "rawValue": true,
+        "color": "blue"
+      },
+      {
+        "id": "816a4a0c-04d5-4adb-966c-fc59340084ca",
+        "type": "custom-text",
+        "customText": "/",
+        "color": "black"
+      },
+      {
+        "id": "6a1bc611-c756-45f3-81a2-ea1a3e4f6296",
+        "type": "context-percentage",
+        "rawValue": true,
+        "metadata": {
+          "inverse": "false"
+        },
+        "color": "brightBlack"
+      },
+      {
+        "id": "9bcbacaa-4a95-4f6f-afbb-abdb7686664d",
+        "type": "custom-text",
+        "customText": " › "
+      },
+      {
+        "id": "44c626f1-7453-4246-a5ef-4dd55124fd9d",
+        "type": "model",
+        "rawValue": true,
+        "color": "cyan"
+      },
+      {
+        "id": "a4a1666b-48fc-462f-ac8e-69717e84225b",
+        "type": "custom-text",
+        "customText": " as "
+      },
+      {
+        "id": "ebb3fe0a-bf7a-4c1f-b4d6-3646e7d591a2",
+        "type": "thinking-effort",
+        "rawValue": true,
+        "color": "magenta"
+      },
+      {
+        "id": "66dbce95-6cb1-44c2-88bb-af47e63f276a",
+        "type": "custom-text",
+        "customText": " › "
+      },
+      {
+        "id": "23c6f401-96e5-4b49-b36f-34bef1c90262",
+        "type": "git-branch",
+        "rawValue": false,
+        "color": "brightYellow"
+      }
+    ]
+  ],
+  "flexMode": "full-until-compact",
+  "compactThreshold": 60,
+  "colorLevel": 1,
+  "defaultPaddingSide": "both",
+  "inheritSeparatorColors": false,
+  "globalBold": false,
+  "gitCacheTtlSeconds": 5,
+  "terminalWidthCacheTtlSeconds": 5,
+  "customCommandCacheTtlSeconds": 0,
+  "minimalistMode": false,
+  "powerline": {
+    "enabled": false,
+    "separators": [
+      ""
+    ],
+    "separatorInvertBackground": [
+      false
+    ],
+    "startCaps": [],
+    "endCaps": [],
+    "autoAlign": false,
+    "continueThemeAcrossLines": false
+  }
+}
