@@ -1,10 +1,15 @@
 {
+  "syncClaudeAiSkills": false,
   "env": {
     "EDITOR": "nvim"
   },
   "permissions": {
+    "allow": [
+      "Read(~/.agents/skills/**)"
+    ],
     "deny": [
-      "Read(~/Projects/Work/.secrets/**)",
+      "Read(~/Projects/Work/_workspace/.secrets/**)",
+      "Read(~/Projects/work-harness/overlay/_workspace/.secrets/**)",
       "EnterPlanMode",
       "ExitPlanMode",
       "DesignSync",
@@ -20,15 +25,35 @@
   },
   "model": "opus",
   "disableClaudeAiConnectors": false,
+  "skillOverrides": {
+    "code-review": "off"
+  },
   "disableBundledSkills": true,
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '/Users/moralesbang/.claude/hooks/block-skills-all-agents.sh'",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "bash '/Users/moralesbang/.claude/skills/work-dependency-bump/scripts/check.sh' --hook",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
     "SessionStart": [
       {
         "matcher": "*",
         "hooks": [
           {
             "type": "command",
-            "command": "bash '/Users/moralesbang/.claude/hooks/herdr-agent-state.sh' session",
+            "command": "f=\"$HOME/.claude/hooks/local/session-start.sh\"; [ -f \"$f\" ] && bash \"$f\"; exit 0",
             "timeout": 10
           }
         ]
@@ -41,12 +66,22 @@
     "command": "bunx -y ccstatusline@latest",
     "padding": 0
   },
+  "enabledPlugins": {
+    "finance@synced": false,
+    "typescript-lsp@claude-plugins-official": true
+  },
   "feedbackDrafts": "quiet",
   "effortLevel": "high",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "high"
+    }
+  },
   "promptSuggestionEnabled": false,
   "tui": "fullscreen",
   "autoMemoryEnabled": false,
   "theme": "custom:catppuccin-mocha",
   "autoCompactEnabled": false,
+  "switchModelsOnFlag": true,
   "agentPushNotifEnabled": false
 }

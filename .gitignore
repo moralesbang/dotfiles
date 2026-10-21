@@ -7,10 +7,9 @@ zsh/.zsh_sessions/
 !/.claude/CLAUDE.md
 !/.claude/settings.json
 !/.claude/hooks/
-!/.claude/skills/
+/.claude/hooks/herdr-*
+/.claude/hooks/local/
 !/.claude/themes/
-/.claude/skills/synced/
-/.claude/skills/hu-add-specific-permission/
 /.claude/**/.DS_Store
 /.claude/**/.env
 /.claude/**/.env.*

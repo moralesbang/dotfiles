@@ -13,9 +13,6 @@
     "thinking": "hide"
   },
   "animations": true,
-  "plugins": [
-    "./herdr-opencode"
-  ],
   "terminal": {
     "copy": "manual"
   },
